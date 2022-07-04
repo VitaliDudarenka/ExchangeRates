@@ -7,6 +7,6 @@ import java.util.*
 
 interface RatesRepository : BaseRepository {
 
-    suspend fun getRates(currency: Currency): ResultWrapper<List<Rate>>
+    suspend fun getRates(baseSymbol: Symbol, symbols: List<Symbol>?): ResultWrapper<List<Rate>>
 
 }

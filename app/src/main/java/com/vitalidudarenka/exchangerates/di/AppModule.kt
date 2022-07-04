@@ -1,5 +1,6 @@
 package com.vitalidudarenka.exchangerates.di
 
+import android.app.Application
 import android.content.Context
 import com.vitalidudarenka.data.network.RestService
 import com.vitalidudarenka.data.repositories.RatesRepositoryImpl
@@ -17,9 +18,7 @@ const val URL_INJECT_NAME = "url_name"
 class AppModule(private val context: Context) {
 
     @Provides
-    fun provideContext(): Context {
-        return context
-    }
+    fun context() = context
 
     @Provides
     @Singleton
@@ -40,7 +39,7 @@ class AppModule(private val context: Context) {
 
     @Provides
     @Named(URL_INJECT_NAME)
-    fun provideServerUrlDebug(): String = ""
+    fun provideServerUrlDebug(): String = "https://api.apilayer.com/exchangerates_data/"
 
 
 }

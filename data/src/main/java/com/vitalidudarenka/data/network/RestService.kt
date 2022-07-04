@@ -16,7 +16,7 @@ class RestService(private val context: Context, private val apiUrl: String) {
     private var interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    private fun interceptor(): OkHttpClient {
+    private fun client(): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -34,7 +34,7 @@ class RestService(private val context: Context, private val apiUrl: String) {
         .baseUrl(apiUrl)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .client(interceptor())
+        .client(client())
         .build()
 
     val api: RestApi = retrofit().create(RestApi::class.java)
