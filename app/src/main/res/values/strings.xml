@@ -3,4 +3,10 @@
 
     <string name="populars">Populars</string>
     <string name="favorites">Favorites</string>
+    <string name="select_currency">Select currency</string>
+    <string name="select_sorting">Select sorting type</string>
+    <string name="name_up_sort">By name A-Z</string>
+    <string name="name_down_sort">By name Z-A</string>
+    <string name="value_up_sort">By value min-max</string>
+    <string name="value_down_sort">By value max-min</string>
 </resources>
