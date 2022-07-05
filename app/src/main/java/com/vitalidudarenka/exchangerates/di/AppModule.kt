@@ -1,7 +1,8 @@
 package com.vitalidudarenka.exchangerates.di
 
-import android.app.Application
 import android.content.Context
+import com.vitalidudarenka.data.db.AppDataBase
+import com.vitalidudarenka.data.db.dao.RateDao
 import com.vitalidudarenka.data.network.RestService
 import com.vitalidudarenka.data.repositories.RatesRepositoryImpl
 import com.vitalidudarenka.data.repositories.SymbolsRepositoryImpl
@@ -22,13 +23,21 @@ class AppModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideRatesRepository(restService: RestService): RatesRepository =
-        RatesRepositoryImpl(restService)
+    fun provideRatesRepository(restService: RestService, rateDao: RateDao): RatesRepository =
+        RatesRepositoryImpl(restService, rateDao)
 
     @Provides
     @Singleton
     fun provideSymbolsRepository(restService: RestService): SymbolsRepository =
         SymbolsRepositoryImpl(restService)
+
+    @Provides
+    @Singleton
+    fun provideRateDao(appDataBase: AppDataBase): RateDao = appDataBase.getRateDao()
+
+    @Provides
+    @Singleton
+    fun provideAppDataBase(context: Context): AppDataBase = AppDataBase.getInstance(context)
 
     @Provides
     @Singleton
