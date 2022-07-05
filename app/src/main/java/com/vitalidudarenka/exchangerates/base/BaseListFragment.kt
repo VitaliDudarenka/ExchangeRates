@@ -37,9 +37,6 @@ open class BaseListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvResults.layoutManager = LinearLayoutManager(requireContext())
-        adapter.initListener {
-
-        }
         binding.rvResults.adapter = adapter
 
         binding.tvCurrency.setOnClickListener {
@@ -59,11 +56,16 @@ open class BaseListFragment : Fragment() {
         viewModel.selectedSortType.observe(viewLifecycleOwner) {
             viewModel.onRatesLoaded()
         }
+        viewModel.favoritesRates.observe(viewLifecycleOwner) {
+            adapter.initFavorites(it)
+        }
 
         initData()
     }
 
-    open fun initData() {}
+    open fun initData() {
+        viewModel.getFavorites()
+    }
 
     private fun onOpenCurrenciesDialog() {
         SelectionDialog().create(

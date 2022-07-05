@@ -15,6 +15,12 @@ class PopularsFragment : BaseListFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter.initListener {
+            if (viewModel.favoritesRates.value?.find { rate -> rate.name == it.name } != null) {
+                viewModel.removeFavorite(it)
+            } else
+                viewModel.saveFavorite(it)
+        }
 
         viewModel.selectedCurrency.observe(viewLifecycleOwner) {
             binding.tvCurrency.text = it.code

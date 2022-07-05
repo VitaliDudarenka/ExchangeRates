@@ -2,7 +2,9 @@ package com.vitalidudarenka.exchangerates.ui.populars
 
 import com.vitalidudarenka.domain.entities.ResultWrapper
 import com.vitalidudarenka.domain.entities.Symbol
+import com.vitalidudarenka.domain.usecases.GetFavoritesUseCase
 import com.vitalidudarenka.domain.usecases.GetPopularsUseCase
+import com.vitalidudarenka.domain.usecases.PostFavoritesUseCase
 import com.vitalidudarenka.exchangerates.app.App
 import com.vitalidudarenka.exchangerates.base.BaseListViewModel
 import com.vitalidudarenka.exchangerates.states.ResultsState

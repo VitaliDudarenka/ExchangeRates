@@ -16,13 +16,19 @@ class CurrenciesAdapter :
 
     private val items: MutableList<Rate> = mutableListOf()
     private lateinit var listener: (Rate) -> Unit
-    private val favorites = mutableListOf<Symbol>()
+    private val favorites = mutableListOf<Rate>()
 
     fun initListener(listener: (Rate) -> Unit) {
         this.listener = listener
     }
 
-    fun initFavorites(items: List<Symbol>) {
+    fun removeItem(rate: Rate) {
+        val position = items.indexOf(rate)
+        items.remove(rate)
+        notifyItemRangeRemoved(position, itemCount)
+    }
+
+    fun initFavorites(items: List<Rate>) {
         favorites.clear()
         favorites.addAll(items)
         notifyDataSetChanged()
@@ -47,7 +53,7 @@ class CurrenciesAdapter :
 
         holder.tvValue.text = item.value.toString()
         holder.tvCode.text = item.name
-        val isFavorite = favorites.map { it.code }.contains(item.name)
+        val isFavorite = favorites.map { it.name }.contains(item.name)
         holder.ivFavorite.setImageResource(if (isFavorite) R.drawable.ic_favorite_enabled else R.drawable.ic_favorite_disabled)
 
         holder.ivFavorite.setOnClickListener {

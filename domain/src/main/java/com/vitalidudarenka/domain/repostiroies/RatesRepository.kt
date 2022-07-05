@@ -9,4 +9,10 @@ interface RatesRepository : BaseRepository {
 
     suspend fun getRates(baseSymbol: Symbol, symbols: List<Symbol>?): ResultWrapper<List<Rate>>
 
+    suspend fun getFavorites(): List<Rate>
+
+    suspend fun saveFavorite(rate: Rate)
+
+    suspend fun removeFavorite(rate: Rate)
+
 }

@@ -7,6 +7,4 @@ interface SymbolsRepository : BaseRepository {
 
     suspend fun getSymbolsRemote(): ResultWrapper<List<Symbol>>
 
-    suspend fun getFavoriteSymbols(): ResultWrapper<List<Symbol>>
-
 }

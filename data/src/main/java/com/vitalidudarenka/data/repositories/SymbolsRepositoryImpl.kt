@@ -1,5 +1,8 @@
 package com.vitalidudarenka.data.repositories
 
+import com.vitalidudarenka.data.db.dao.RateDao
+import com.vitalidudarenka.data.db.entities.transformToDB
+import com.vitalidudarenka.data.db.entities.transformToDomain
 import com.vitalidudarenka.data.network.RestService
 import com.vitalidudarenka.domain.entities.ResultWrapper
 import com.vitalidudarenka.domain.entities.Symbol
@@ -18,10 +21,6 @@ class SymbolsRepositoryImpl(private val apiService: RestService) : SymbolsReposi
         } catch (e: Throwable) {
             ResultWrapper.Error(e)
         }
-    }
-
-    override suspend fun getFavoriteSymbols(): ResultWrapper<List<Symbol>> {
-        TODO("Not yet implemented")
     }
 
 }
