@@ -5,8 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.vitalidudarenka.exchangerates.base.BaseListFragment
+import com.vitalidudarenka.exchangerates.ui.favorites.FavoritesFragment
 
 class PopularsFragment : BaseListFragment() {
+
+    companion object {
+        fun newInstance(bundle: Bundle? = null) =
+            PopularsFragment().apply { arguments = bundle }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -23,14 +29,9 @@ class PopularsFragment : BaseListFragment() {
         }
 
         viewModel.selectedCurrency.observe(viewLifecycleOwner) {
-            binding.tvCurrency.text = it.code
+            binding.tvCurrency.text = StringBuilder(it.code).append(" ").append(it.name)
             (viewModel as PopularsViewModel).getRates(it)
         }
-    }
-
-
-    override fun initData() {
-        (viewModel as PopularsViewModel).getSymbols()
     }
 
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -17,6 +18,7 @@ import com.vitalidudarenka.exchangerates.dialogs.SelectionDialog
 import com.vitalidudarenka.exchangerates.states.ResultsState
 import com.vitalidudarenka.exchangerates.ui.adapter.CurrenciesAdapter
 import com.vitalidudarenka.exchangerates.ui.populars.PopularsViewModel
+import kotlinx.coroutines.launch
 import java.lang.StringBuilder
 
 open class BaseListFragment : Fragment() {
@@ -64,6 +66,7 @@ open class BaseListFragment : Fragment() {
     }
 
     open fun initData() {
+        viewModel.getSymbols()
         viewModel.getFavorites()
     }
 
@@ -123,9 +126,9 @@ open class BaseListFragment : Fragment() {
                 binding.rvResults.visibility = View.GONE
             }
             if (it is ResultsState.RatesLoaded) {
+                adapter.setItems(it.data)
                 binding.progressBar.visibility = View.GONE
                 binding.rvResults.visibility = View.VISIBLE
-                adapter.setItems(it.data)
             }
             if (it is ResultsState.Error) {
                 binding.progressBar.visibility = View.GONE

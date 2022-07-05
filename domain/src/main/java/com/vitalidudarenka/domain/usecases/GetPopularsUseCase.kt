@@ -18,8 +18,8 @@ class GetPopularsUseCase @Inject constructor(
         return symbolsRepository.getSymbolsRemote()
     }
 
-    suspend fun getRates(baseSymbol: Symbol, symbols:List<Symbol>?): ResultWrapper<List<Rate>> {
-        return ratesRepository.getRates(baseSymbol, symbols)
+    suspend fun getRates(baseSymbol: Symbol, rates:List<Rate>?): ResultWrapper<List<Rate>> {
+        return ratesRepository.getRates(baseSymbol, rates)
     }
 
 }

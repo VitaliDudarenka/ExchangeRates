@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.vitalidudarenka.data.db.entities.RateDB
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RateDao {
@@ -16,6 +17,6 @@ interface RateDao {
     suspend fun delete(symbolDB: RateDB)
 
     @Query("SELECT * FROM rate ORDER BY code")
-    suspend fun getAll(): List<RateDB>
+    fun getAll(): Flow<List<RateDB>>
 
 }

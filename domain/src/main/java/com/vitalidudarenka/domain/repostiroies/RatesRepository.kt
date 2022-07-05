@@ -3,13 +3,13 @@ package com.vitalidudarenka.domain.repostiroies
 import com.vitalidudarenka.domain.entities.Rate
 import com.vitalidudarenka.domain.entities.ResultWrapper
 import com.vitalidudarenka.domain.entities.Symbol
-import java.util.*
+import kotlinx.coroutines.flow.Flow
 
 interface RatesRepository : BaseRepository {
 
-    suspend fun getRates(baseSymbol: Symbol, symbols: List<Symbol>?): ResultWrapper<List<Rate>>
+    suspend fun getRates(baseSymbol: Symbol, rates: List<Rate>?): ResultWrapper<List<Rate>>
 
-    suspend fun getFavorites(): List<Rate>
+    fun getFavorites(): Flow<List<Rate>>
 
     suspend fun saveFavorite(rate: Rate)
 
